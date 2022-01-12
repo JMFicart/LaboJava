@@ -34,7 +34,7 @@ public enum ListeMessage {
     Msg030("Le nom du type d'activité ne peut être nul !"),
     Msg031("Ce type d'activité n'existe pas ! "),
     Msg032("Saisir le nom de l'horaire = "),
-    Msg033("Cet horaire existe déjà !"),
+    Msg033("Le nom de l'horaire ne peut être nul !"),
     Msg034("Saisir la date et l'heure de début (DD/MM/YYYY HH:MM) = "),
     Msg035("Mauvais format de date !");
 

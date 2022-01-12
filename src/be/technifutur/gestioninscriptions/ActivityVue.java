@@ -7,29 +7,32 @@ public class ActivityVue {
     static Scanner es = new Scanner(System.in);
 
     public static String getname(){
-        System.out.print(ListeMessage.Msg032);
+        System.out.print(ListeMessage.Msg032.getMsg());
         return es.nextLine();
     }
 
     public static String gettype(){
-        String activityname;
+        String name;
 
-        System.out.print(ListeMessage.Msg012);
-        activityname = es.nextLine();
-        return activityname;
+        System.out.print(ListeMessage.Msg012.getMsg());
+        name = es.nextLine();
+        return name;
     }
 
     public static LocalDateTime getstart(){
         String dtstart;
         LocalDateTime rt = null;
 
-        System.out.print(ListeMessage.Msg034);
+        System.out.print(ListeMessage.Msg034.getMsg());
         dtstart = es.nextLine();
-        if(dtstart.matches("(Y|N)")) {
-            rt = (LocalDateTime) dtstart;
+//        if(dtstart.matches("([1-2][0-9]?|3[01]?|[4-9])\\/(1[0-2]?|[2-9])\\/([1-9]\\d{3})\\ ([0-1][0-9]|2[0-3]):([0-5][0-9])")) {
+        if(dtstart.matches("([1-2][0-9]?|3[01]?|[4-9])\\/(1[0-2]?|0[1-9])\\/([1-9]\\d{3})")) {
+//            rt = (LocalDateTime) dtstart;
+            System.out.println("t3");
+            rt = null;
         }
         else
-            System.out.println(ListeMessage.Msg035);
+            System.out.println(ListeMessage.Msg035.getMsg());
         return rt;
     }
 
@@ -68,7 +71,7 @@ public class ActivityVue {
         System.out.print(ListeMessage.Msg003);
         yn = sc.nextLine().toUpperCase();
         if(yn.matches("(Y|N)")) {
-            if (yn.equals("Y")) {response = true};
+            if (yn.equals("Y")) {response = true;};
         }
         else
             System.out.println(ListeMessage.Msg004);

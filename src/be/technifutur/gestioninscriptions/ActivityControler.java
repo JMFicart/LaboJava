@@ -104,20 +104,28 @@ public class ActivityControler {
     }
 
     public String checkNomHoraire(String name){
-        if (!(search(name) == null)) {
-            activityvue.displaymessage(ListeMessage.Msg033, name);
-            return null;
+        if (name.length() > 0) {
+            if (!(search(name) == null)) {
+                activityvue.displaymessage(ListeMessage.Msg001, name);
+                return null;
+            } else {
+                return name;
+            }
         }
         else {
-            return name;
+            activityvue.displaymessage(ListeMessage.Msg033, name);
+            return null;
         }
     }
 
     public LocalDateTime checkStart(LocalDateTime start){
+        System.out.println("cs1");
         if (start.isAfter(LocalDateTime.now())){
+            System.out.println("cs2");
             return start;
         }
         else {
+            System.out.println("cs3");
             return null;
         }
     }
