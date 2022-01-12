@@ -3,15 +3,14 @@ package be.technifutur.gestioninscriptions;
 import java.util.concurrent.Callable;
 
 public class MenuFactory {
-    ActivityListControler alc;
-    ActivityListFactory alf;
-    ListActivityType lat;
-//    ListActivityType lfa;
-    ListActivityVue lav;
-    GetActivityType gat;
+    ActivityListControler activitylistcontroler;
+    ActivityListModele acticitylistmodele;
+    ListActivityType listactivitytype;
+    ListActivityVue listactivityvue;
+    GetActivityType getactivitytype;
     IOData io;
-    ActivityTypeCreation atc;
-    RemoveActivityType rat;
+    ActivityTypeCreation activitytypecreation;
+    RemoveActivityType removeactivitytypt;
 
     ActivityControler activitycontroler;
     ActivityCreation activitycreation;
@@ -19,29 +18,30 @@ public class MenuFactory {
     ActivityRemove activityremove;
     ActivityUpdate activityupdate;
     ActivityVue activityvue;
+    ActivityFileList activityfilelist;
 
     MenuFactory(){
-        if (alc == null){
-            alc = new ActivityListControler();
-            lat = new ListActivityType();
-            lav = new ListActivityVue();
+        if (activitylistcontroler == null){
+            activitylistcontroler = new ActivityListControler();
+            listactivitytype = new ListActivityType();
+            listactivityvue = new ListActivityVue();
             io = new IOData();
-            gat = new GetActivityType();
-            atc = new ActivityTypeCreation();
-            rat = new RemoveActivityType();
-            alf = new ActivityListFactory();
+            getactivitytype = new GetActivityType();
+            activitytypecreation = new ActivityTypeCreation();
+            removeactivitytypt = new RemoveActivityType();
+            acticitylistmodele = new ActivityListModele();
 
-            alc.setModele(alf);
-            alc.setIO(io);
-            alc.setVue(lav);
-            atc.setVue(lav);
-            atc.setControler(alc);
-            gat.setVue(lav);
-            gat.setModele(alc);
-            lat.setControler(alc);
-            rat.setControler(alc);
-            rat.setVue(lav);
-            io.setModele(alf);
+            activitylistcontroler.setModele(acticitylistmodele);
+            activitylistcontroler.setIO(io);
+            activitylistcontroler.setVue(listactivityvue);
+            activitytypecreation.setVue(listactivityvue);
+            activitytypecreation.setControler(activitylistcontroler);
+            getactivitytype.setVue(listactivityvue);
+            getactivitytype.setModele(activitylistcontroler);
+            listactivitytype.setControler(activitylistcontroler);
+            removeactivitytypt.setControler(activitylistcontroler);
+            removeactivitytypt.setVue(listactivityvue);
+            io.setModele(acticitylistmodele);
         }
 
         if (activitycontroler == null){
@@ -51,6 +51,7 @@ public class MenuFactory {
             activityremove = new ActivityRemove();
             activityupdate = new ActivityUpdate();
             activityvue = new ActivityVue();
+            activityfilelist = new ActivityFileList();
 
             activitycontroler.setModele(activitymodele);
             activitycontroler.setVue(activityvue);
@@ -59,6 +60,7 @@ public class MenuFactory {
             activitycreation.setVue(activityvue);
             activityupdate.setControler(activitycontroler);
             activityupdate.setVue(activityvue);
+            activityfilelist.setControler(activitycontroler);
         }
     }
 
@@ -95,11 +97,11 @@ public class MenuFactory {
 
     private MenuModel getModelActivity(){
         MenuModel model1 = new MenuModel(ListeMessage.Msg018.getMsg());
-        model1.addNode(addItemActivityList());
-        model1.addNode(getItemActivityList());
-        model1.addNode(removeItemActivityList());
-        model1.addNode(listFileActivity());
-        model1.addNode(getItemQuitterActivity());
+        model1.addNode(addItemActivityType());
+        model1.addNode(getItemActivityType());
+        model1.addNode(removeItemActivityType());
+        model1.addNode(listFileActivityType());
+        model1.addNode(getItemQuitterActivityType());
         return model1;
     }
 
@@ -108,6 +110,7 @@ public class MenuFactory {
         model1.addNode(addItemHoraire());
         model1.addNode(updateItemHoraire());
         model1.addNode(removeItemHoraire());
+        model1.addNode(listfileActivity());
         model1.addNode(getItemQuitterHoraire());
         return model1;
     }
@@ -116,23 +119,23 @@ public class MenuFactory {
         return createItem(ListeMessage.Msg020.getMsg(), null, null );
     }
 
-    public Item addItemActivityList() {
-        return createItem(ListeMessage.Msg021.getMsg(), atc, null);
+    public Item addItemActivityType() {
+        return createItem(ListeMessage.Msg021.getMsg(), activitytypecreation, null);
     }
 
-    public Item getItemActivityList() {
-        return createItem(ListeMessage.Msg022.getMsg(), gat, null);
+    public Item getItemActivityType() {
+        return createItem(ListeMessage.Msg022.getMsg(), getactivitytype, null);
     }
 
-    public Item removeItemActivityList() {
-        return createItem(ListeMessage.Msg023.getMsg(), rat, null);
+    public Item removeItemActivityType() {
+        return createItem(ListeMessage.Msg023.getMsg(), removeactivitytypt, null);
     }
 
-    public Item listFileActivity() {
-        return createItem(ListeMessage.Msg024.getMsg(), lat, null);
+    public Item listFileActivityType() {
+        return createItem(ListeMessage.Msg024.getMsg(), listactivitytype, null);
     }
 
-    private Item getItemQuitterActivity() {return createItem(ListeMessage.Msg020.getMsg(), null, null);    }
+    private Item getItemQuitterActivityType() {return createItem(ListeMessage.Msg020.getMsg(), null, null);    }
 
     public Item addItemHoraire() {
         return createItem(ListeMessage.Msg025.getMsg(), activitycreation, null);
@@ -144,6 +147,10 @@ public class MenuFactory {
 
     public Item removeItemHoraire() {
         return createItem(ListeMessage.Msg027.getMsg(), activityremove, null);
+    }
+
+    public Item listfileActivity() {
+        return createItem(ListeMessage.Msg029.getMsg(), activityfilelist, null);
     }
 
     private Item getItemQuitterHoraire() {

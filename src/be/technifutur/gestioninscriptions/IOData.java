@@ -1,14 +1,12 @@
 package be.technifutur.gestioninscriptions;
 
-import java.util.ArrayList;
-
 public class IOData {
 //    DataStore<MyData> myDataDataStore = new DataStore<>("Activity.txt", MyData::new);
     DataStore <DataActivityType> dsActivityType;
     DataStore<DataActivity> dsActivity;
     DataActivityType dt;
     DataActivity dataactivity;
-    ActivityListFactory alf;
+    ActivityListModele alf;
 
     public DataActivityType LoadDataActivityType(){
 //        DataStore<MyData> myDataDataStore = new DataStore<>("ActivityType.txt", MyData::new);
@@ -39,5 +37,5 @@ public class IOData {
         dsActivity.save();
     }
 
-    public void setModele(ActivityListFactory type){this.alf = type;}
+    public void setModele(ActivityListModele type){this.alf = type;}
 }

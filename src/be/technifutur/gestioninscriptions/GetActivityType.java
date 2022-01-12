@@ -3,16 +3,16 @@ package be.technifutur.gestioninscriptions;
 import java.util.concurrent.Callable;
 
 public class GetActivityType implements Callable {
-    ListActivityVue lav;
-    ActivityListControler alc;
+    ListActivityVue listactivityvue;
+    ActivityListControler activitylistcontroler;
 
     @Override
     public Object call() {
-        alc.afficher(lav.getname());
+        activitylistcontroler.afficher(listactivityvue.getname());
         return null;
     }
 
-    public void setVue(ListActivityVue vue){this.lav = vue;}
+    public void setVue(ListActivityVue vue){this.listactivityvue = vue;}
 
-    public void setModele(ActivityListControler type){this.alc = type;}
+    public void setModele(ActivityListControler type){this.activitylistcontroler = type;}
 }

@@ -29,7 +29,8 @@ public enum ListeMessage {
     Msg025("Créer un horaire"),
     Msg026("Modifier un horaire"),
     Msg027("Supprimer un horaire"),
-    Msg028("Choix : ");
+    Msg028("Choix : "),
+    Msg029("Lister le fichier des horaires");
 
     private String message ;
 

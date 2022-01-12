@@ -4,7 +4,7 @@ import java.util.Map;
 
 public class ActivityListControler {
     ListActivityVue listactivityvue;
-    ActivityListFactory activitylistfactory;
+    ActivityListModele activitylistfactory;
     IOData io;
     ActivityType activitytype;
 
@@ -70,7 +70,7 @@ public class ActivityListControler {
         return rt;
     }
 
-    public void setModele(ActivityListFactory type){this.activitylistfactory = type;}
+    public void setModele(ActivityListModele type){this.activitylistfactory = type;}
 
     public void setIO(IOData io) {this.io = io;}
 

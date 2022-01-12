@@ -13,7 +13,10 @@ public class ActivityVue {
 
     public static ActivityType gettype(){
         ActivityType type;
+        String activityname;
 
+        System.out.println(ListeMessage.Msg012);
+        activityname = es.nextLine();
         type = new ActivityType("Test1", true);
         return type;
     }
@@ -30,11 +33,11 @@ public class ActivityVue {
         return dtend;
     }
 
-    public void displayinfo(Activity at){
-        System.out.println(ListeMessage.Msg011.getMsg() + at.name);
-        System.out.println(ListeMessage.Msg012.getMsg() + at.type);
-        System.out.println(ListeMessage.Msg013.getMsg() + at.start);
-        System.out.println(ListeMessage.Msg014.getMsg() + at.end);
+    public void displayinfo(Activity activity){
+        System.out.println(ListeMessage.Msg011.getMsg() + activity.name);
+        System.out.println(ListeMessage.Msg012.getMsg() + activity.type);
+        System.out.println(ListeMessage.Msg013.getMsg() + activity.start);
+        System.out.println(ListeMessage.Msg014.getMsg() + activity.end);
         System.out.println("");
     }
 
@@ -57,9 +60,9 @@ public class ActivityVue {
         Scanner sc = new Scanner(System.in);
 
         System.out.print(ListeMessage.Msg003);
-        yn = sc.nextLine();
-        if(yn.matches("(y|Y|n|N)")) {
-            if (yn.toUpperCase().equals("Y"))
+        yn = sc.nextLine().toUpperCase();
+        if(yn.matches("(Y|N)")) {
+            if (yn.equals("Y"))
                 response = true;
             else
                 response = false;
