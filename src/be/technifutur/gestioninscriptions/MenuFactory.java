@@ -56,6 +56,7 @@ public class MenuFactory {
             activitycontroler.setModele(activitymodele);
             activitycontroler.setVue(activityvue);
             activitycontroler.setIO(io);
+            activitycontroler.setActivityTypeModele(acticitylistmodele);
             activitycreation.setControler(activitycontroler);
             activitycreation.setVue(activityvue);
             activityupdate.setControler(activitycontroler);

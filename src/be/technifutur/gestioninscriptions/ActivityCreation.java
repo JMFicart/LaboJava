@@ -13,11 +13,15 @@ public class ActivityCreation implements Callable {
 
     @Override
     public Object call() {
-        name = activityvue.getname();
-        type = activityvue.gettype();
-        start = activityvue.getstart();
-        end = activityvue.getend();
-        activitycontroler.addnew(name, type, start, end);
+        name = activitycontroler.checkNomHoraire(activityvue.getname());
+        type = activitycontroler.checkActivityType(activityvue.gettype());
+        start = activitycontroler.checkStart(activityvue.getstart());
+        end = activitycontroler.checkEnd(start, activityvue.getend());
+
+        System.out.println(name + " " + type.name + " " + type.registration + " " + start + " " +end);
+//        if (!(type == null)) {
+//            activitycontroler.addnew(name, type, start, end);
+//        }
         return null;
     }
 

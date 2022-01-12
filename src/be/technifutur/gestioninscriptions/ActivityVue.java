@@ -7,24 +7,30 @@ public class ActivityVue {
     static Scanner es = new Scanner(System.in);
 
     public static String getname(){
-        System.out.print(ListeMessage.Msg005);
+        System.out.print(ListeMessage.Msg032);
         return es.nextLine();
     }
 
-    public static ActivityType gettype(){
-        ActivityType type;
+    public static String gettype(){
         String activityname;
 
-        System.out.println(ListeMessage.Msg012);
+        System.out.print(ListeMessage.Msg012);
         activityname = es.nextLine();
-        type = new ActivityType("Test1", true);
-        return type;
+        return activityname;
     }
 
     public static LocalDateTime getstart(){
-        LocalDateTime dtstart;
-        dtstart = LocalDateTime.now();
-        return dtstart;
+        String dtstart;
+        LocalDateTime rt = null;
+
+        System.out.print(ListeMessage.Msg034);
+        dtstart = es.nextLine();
+        if(dtstart.matches("(Y|N)")) {
+            rt = (LocalDateTime) dtstart;
+        }
+        else
+            System.out.println(ListeMessage.Msg035);
+        return rt;
     }
 
     public static LocalDateTime getend(){
@@ -62,10 +68,7 @@ public class ActivityVue {
         System.out.print(ListeMessage.Msg003);
         yn = sc.nextLine().toUpperCase();
         if(yn.matches("(Y|N)")) {
-            if (yn.equals("Y"))
-                response = true;
-            else
-                response = false;
+            if (yn.equals("Y")) {response = true};
         }
         else
             System.out.println(ListeMessage.Msg004);

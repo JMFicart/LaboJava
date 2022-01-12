@@ -7,6 +7,7 @@ import java.util.Map;
 public class ActivityControler {
     ActivityVue activityvue;
     ActivityModele activitymodele;
+    ActivityListModele activitylistmodele;
     IOData io;
     Activity activity;
 
@@ -75,9 +76,8 @@ public class ActivityControler {
     }
 
     private Activity search(String name){
-        Activity rt;
+        Activity rt = null;
 
-        rt = null;
         if (activitymodele.getDt().list.containsKey(name)){
             rt = activitymodele.getDt().list.get(name);
         }
@@ -85,9 +85,58 @@ public class ActivityControler {
         return rt;
     }
 
+    public ActivityType checkActivityType(String name){
+        ActivityType activitytype = null;
+
+        if (name.length() > 0){
+            if (activitylistmodele.getDt().list.containsKey(name)){
+                activitytype = activitylistmodele.getDt().list.get(name);
+            }
+            else
+            {
+                activityvue.displaymessage(ListeMessage.Msg031, name);
+            }
+        }
+        else {
+            activityvue.displaymessage(ListeMessage.Msg030,"");
+        }
+        return activitytype;
+    }
+
+    public String checkNomHoraire(String name){
+        if (!(search(name) == null)) {
+            activityvue.displaymessage(ListeMessage.Msg033, name);
+            return null;
+        }
+        else {
+            return name;
+        }
+    }
+
+    public LocalDateTime checkStart(LocalDateTime start){
+        if (start.isAfter(LocalDateTime.now())){
+            return start;
+        }
+        else {
+            return null;
+        }
+    }
+
+    public LocalDateTime checkEnd(LocalDateTime start, LocalDateTime end){
+        if (end.isAfter(LocalDateTime.now()) && end.isAfter(start)){
+            return end;
+        }
+        else {
+            return null;
+        }
+    }
+
     public void setModele(ActivityModele type){this.activitymodele = type;}
 
     public void setIO(IOData io) {this.io = io;}
 
     public void setVue(ActivityVue activityvue){this.activityvue = activityvue;}
+
+    public void setActivityTypeModele(ActivityListModele activitylistmodele){this.activitylistmodele = activitylistmodele;}
+
 }

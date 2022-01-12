@@ -30,17 +30,19 @@ public enum ListeMessage {
     Msg026("Modifier un horaire"),
     Msg027("Supprimer un horaire"),
     Msg028("Choix : "),
-    Msg029("Lister le fichier des horaires");
+    Msg029("Lister le fichier des horaires"),
+    Msg030("Le nom du type d'activité ne peut être nul !"),
+    Msg031("Ce type d'activité n'existe pas ! "),
+    Msg032("Saisir le nom de l'horaire = "),
+    Msg033("Cet horaire existe déjà !"),
+    Msg034("Saisir la date et l'heure de début (DD/MM/YYYY HH:MM) = "),
+    Msg035("Mauvais format de date !");
 
     private String message ;
 
     private ListeMessage(String abreviation) {
         this.message = abreviation ;
     }
-
-    //    Civilite civilite = Civilite.MADEMOISELLE ;
-// System.out.println("Civilite : " + civilite + " [" + civilite.getAbreviation() + "]") ;
-// > Civilite : MADEMOISELLE [MLLE]
 
     public String getMsg() {
         return  this.message ;
