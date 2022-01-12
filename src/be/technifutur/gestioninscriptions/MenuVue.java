@@ -21,7 +21,7 @@ public class MenuVue {
         if (this.error != null) {
             System.out.printf("Error : %s\n", error);
         }
-        System.out.print("Choix : ");
+        System.out.print(ListeMessage.Msg028.getMsg());
         choix = input.nextLine();
         return choix;
     }

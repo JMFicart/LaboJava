@@ -7,7 +7,7 @@ public class ActivityVue {
     static Scanner es = new Scanner(System.in);
 
     public static String getname(){
-        System.out.print("Saisir le nom de l'activité = ");
+        System.out.print(ListeMessage.Msg005);
         return es.nextLine();
     }
 
@@ -31,15 +31,23 @@ public class ActivityVue {
     }
 
     public void displayinfo(Activity at){
-        System.out.println("Nom de l'activité = " + at.name);
-        System.out.println("Type d'activité   = " + at.type);
-        System.out.println("Date de début     = " + at.start);
-        System.out.println("Date de fin       = " + at.end);
+        System.out.println(ListeMessage.Msg011.getMsg() + at.name);
+        System.out.println(ListeMessage.Msg012.getMsg() + at.type);
+        System.out.println(ListeMessage.Msg013.getMsg() + at.start);
+        System.out.println(ListeMessage.Msg014.getMsg() + at.end);
         System.out.println("");
     }
 
-    public void displaymessagenotfound(String name){
-        System.out.println(name + " pas trouvé !");
+    public void displaymessage(ListeMessage msg,String name){
+        String msgtodisplay;
+
+        if (name.equals("")){
+            msgtodisplay = msg.getMsg();
+        }
+        else {
+            msgtodisplay = name + " " + msg.getMsg();
+        }
+        System.out.println(msgtodisplay);
         System.out.println("");
     }
 
@@ -48,7 +56,7 @@ public class ActivityVue {
         String yn;
         Scanner sc = new Scanner(System.in);
 
-        System.out.print("Confirmez-vous la suppression de cet enregistrement ? (Y/N) ");
+        System.out.print(ListeMessage.Msg003);
         yn = sc.nextLine();
         if(yn.matches("(y|Y|n|N)")) {
             if (yn.toUpperCase().equals("Y"))
@@ -57,7 +65,7 @@ public class ActivityVue {
                 response = false;
         }
         else
-            System.out.println("Ce n'est pas une option");
+            System.out.println(ListeMessage.Msg004);
 
         return response;
     }

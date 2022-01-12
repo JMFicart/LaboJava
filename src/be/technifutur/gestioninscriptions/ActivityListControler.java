@@ -1,19 +1,21 @@
 package be.technifutur.gestioninscriptions;
 
+import java.util.Map;
+
 public class ActivityListControler {
-    ListActivityVue lav;
-    ActivityListFactory alf;
+    ListActivityVue listactivityvue;
+    ActivityListFactory activitylistfactory;
     IOData io;
     ActivityType activitytype;
 
     public ActivityType addnew(String name, boolean registrationRequired){
         if (search(name) == null) {
             activitytype = new ActivityType(name, registrationRequired);
-            alf.getDt().list.add(activitytype);
-            io.SaveData(alf.getDt());
+            activitylistfactory.getDt().list.put(activitytype.name, activitytype);
+            io.SaveData(activitylistfactory.getDt());
         }
         else {
-            System.out.println(name + " existe déjà !");
+            listactivityvue.displaymessage(ListeMessage.Msg001, name);
             activitytype = null;
         }
         return activitytype;
@@ -22,10 +24,10 @@ public class ActivityListControler {
     public ActivityType afficher(String name){
         activitytype = search(name);
         if (activitytype != null) {
-            lav.displayinfo(activitytype);
+            listactivityvue.displayinfo(activitytype);
         }
         else {
-            lav.displaymessagenotfound(name);
+            listactivityvue.displaymessage(ListeMessage.Msg002, name);
             activitytype = null;
         }
         return activitytype;
@@ -34,24 +36,26 @@ public class ActivityListControler {
     public ActivityType remove(String name){
         activitytype = search(name);
         if (activitytype != null) {
-            lav.displayinfo(activitytype);
-            if (lav.getdeleteconfirmation() == true){
-                alf.getDt().list.remove(activitytype);
-                io.SaveData(alf.getDt());
+            listactivityvue.displayinfo(activitytype);
+            if (listactivityvue.getdeleteconfirmation() == true){
+                activitylistfactory.getDt().list.remove(activitytype);
+                io.SaveData(activitylistfactory.getDt());
             }
         }
         else {
-            System.out.println(name + " pas trouvé !");
+            listactivityvue.displaymessage(ListeMessage.Msg002, name);
             activitytype = null;
         }
         return activitytype;
     }
 
     public void lister() {
-        System.out.println("Type d'activité, Registration");
+        ActivityType activityType;
 
-        for (ActivityType a : alf.getDt().list){
-            System.out.println(a.name + ", " + a.registration);
+        System.out.println(ListeMessage.Msg010.getMsg());
+        for (Map.Entry s : activitylistfactory.getDt().list.entrySet()){
+            activitytype = (ActivityType) s.getValue();
+            System.out.println(activitytype.name + ", " + activitytype.registration);
         }
     }
 
@@ -59,18 +63,16 @@ public class ActivityListControler {
         ActivityType rt;
 
         rt = null;
-        for (ActivityType a : alf.getDt().list){
-            if(a.name.equals(name)){
-                rt = a;
-                break;
-            }
+        if (activitylistfactory.getDt().list.containsKey(name)){
+            rt = activitylistfactory.getDt().list.get(name);
         }
+
         return rt;
     }
 
-    public void setModele(ActivityListFactory type){this.alf = type;}
+    public void setModele(ActivityListFactory type){this.activitylistfactory = type;}
 
     public void setIO(IOData io) {this.io = io;}
 
-    public void setVue(ListActivityVue lav){this.lav = lav;}
+    public void setVue(ListActivityVue listactivityvue){this.listactivityvue = listactivityvue;}
 }

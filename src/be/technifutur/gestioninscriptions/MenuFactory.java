@@ -62,12 +62,13 @@ public class MenuFactory {
         }
     }
 
-    private Item createItem(String itemname, Callable itemaction) {
+    private Item createItem(String itemname, Callable itemaction, Callable itemparent) {
         Item wItem;
 
         wItem = new Item();
         wItem.setName(itemname);
         wItem.setAction(itemaction);
+        wItem.setActionParent(itemparent);
         return wItem;
     }
 
@@ -83,7 +84,7 @@ public class MenuFactory {
     }
 
     private MenuModel getModelPrincipal(){
-        MenuModel model = new MenuModel("Menu principal");
+        MenuModel model = new MenuModel(ListeMessage.Msg017.getMsg());
         MenuNode sousmenu = CreateMenu(getModelActivity());
         model.addNode(sousmenu);
         sousmenu = CreateMenu(getModelHoraire());
@@ -93,17 +94,17 @@ public class MenuFactory {
     }
 
     private MenuModel getModelActivity(){
-        MenuModel model1 = new MenuModel("Gestion Activités");
+        MenuModel model1 = new MenuModel(ListeMessage.Msg018.getMsg());
         model1.addNode(addItemActivityList());
         model1.addNode(getItemActivityList());
         model1.addNode(removeItemActivityList());
         model1.addNode(listFileActivity());
-        model1.addNode(getItemQuitter());
+        model1.addNode(getItemQuitterActivity());
         return model1;
     }
 
     private MenuModel getModelHoraire(){
-        MenuModel model1 = new MenuModel("Gestion Horaires");
+        MenuModel model1 = new MenuModel(ListeMessage.Msg019.getMsg());
         model1.addNode(addItemHoraire());
         model1.addNode(updateItemHoraire());
         model1.addNode(removeItemHoraire());
@@ -111,39 +112,41 @@ public class MenuFactory {
         return model1;
     }
 
+    private Item getItemQuitter() {
+        return createItem(ListeMessage.Msg020.getMsg(), null, null );
+    }
+
     public Item addItemActivityList() {
-        return createItem("Créer un type d'activité", atc);
+        return createItem(ListeMessage.Msg021.getMsg(), atc, null);
     }
 
     public Item getItemActivityList() {
-        return createItem("Chercher un type d'activité", gat);
+        return createItem(ListeMessage.Msg022.getMsg(), gat, null);
     }
 
     public Item removeItemActivityList() {
-        return createItem("Supprimer un type d'activité", rat);
+        return createItem(ListeMessage.Msg023.getMsg(), rat, null);
     }
 
     public Item listFileActivity() {
-        return createItem("Lister le fichier des activités", lat);
+        return createItem(ListeMessage.Msg024.getMsg(), lat, null);
     }
 
-    private Item getItemQuitter() {
-        return createItem("Quitter", null );
-    }
+    private Item getItemQuitterActivity() {return createItem(ListeMessage.Msg020.getMsg(), null, null);    }
 
     public Item addItemHoraire() {
-        return createItem("Créer un horaire", activitycreation);
+        return createItem(ListeMessage.Msg025.getMsg(), activitycreation, null);
     }
 
     public Item updateItemHoraire() {
-        return createItem("Modifier un horaire", activityupdate);
+        return createItem(ListeMessage.Msg026.getMsg(), activityupdate, null);
     }
 
     public Item removeItemHoraire() {
-        return createItem("Supprimer un horaire", activityremove);
+        return createItem(ListeMessage.Msg027.getMsg(), activityremove, null);
     }
 
     private Item getItemQuitterHoraire() {
-        return createItem("Quitter", null );
+        return createItem(ListeMessage.Msg020.getMsg(), null, null );
     }
 }

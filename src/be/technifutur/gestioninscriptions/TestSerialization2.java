@@ -1,37 +1,59 @@
 package be.technifutur.gestioninscriptions;
 
-import java.time.LocalDateTime;
+import java.sql.Time;
+import java.time.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.EnumSet;
+import java.util.Map;
+
+//enum Level {
+//    LOW,
+//    MEDIUM,
+//    HIGH
+//}
 
 public class TestSerialization2 {
     public static void main(String[] args) {
-        DataStore<DataActivity> myDataDataStore1 = new DataStore<>("activity.txt", DataActivity::new);
+        DataStore<DataActivity1> myDataDataStore1 = new DataStore<>("testactivity.txt", DataActivity1::new);
         Integer ds;
-        ActivityType d;
-        Activity e;
+        ActivityType activitytype;
+        Activity activity;
 
-        DataActivity da= myDataDataStore1.getData();
+        DataActivity1 dataactivity = myDataDataStore1.getData();
 
-//        ds = da.list.size();
-//        for(Integer i = ds; i < (ds + 5); i++){
-//            d = new ActivityType("Test" + i, true);
-//            e = new Activity("ABCD" + i, d, LocalDateTime.now(), LocalDateTime.now());
-//            System.out.println(i + " " + e.name + " " + d.name + " " + d.registration + " " + e.start + " " + e.end);
-//            da.list.add(e);
+        ds = dataactivity.list.size();
+        System.out.println("Taille = " + ds);
+//        for (Integer i = ds; i < (ds + 10); i++) {
+//            activitytype = new ActivityType("Test" + i, true);
+//            activity = new Activity("ABCD" + i, activitytype, LocalDateTime.now(), LocalDateTime.now());
+//            System.out.println(i + " " + activity.name + " " + activitytype.name + " " + activitytype.registration + " " + activity.start + " " + activity.end);
+//            dataactivity.list.put(activity.name, activity);
 //        }
 //
 //        myDataDataStore1.save();
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        String dateStr = simpleDateFormat.format(LocalDateTime.now().toLocalDate());
-        System.out.println(dateStr);
-
+//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+//        SimpleDateFormat simpleTimeFormat = new SimpleDateFormat("HH:mm:ss");
+//
 //        System.out.println("");
-//        System.out.println("Données présentes");
-//        for (Activity s : da.list){
-//            d = s.type;
-//            System.out.println(s.name + " " + d.name + " " + d.registration + " " + simpleDateFormat.format(s.start) + " " + simpleDateFormat.format(s.end));
-//        }
+        System.out.println("Données présentes");
+        for (Map.Entry s : dataactivity.list.entrySet()){
+            activity = (Activity) s.getValue();
+            activitytype = activity.type;
+            System.out.println(activity.name + " " + activitytype.name + " " + activitytype.registration + " " +
+                    convertDate(activity.start) + " " + convertTime(activity.start) + " " +
+                    convertDate(activity.end) + " " + convertTime(activity.end));
+        }
+    }
+
+    private static String convertDate(LocalDateTime e){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        return simpleDateFormat.format(java.sql.Timestamp.valueOf(e));
+    }
+
+    private static String convertTime(LocalDateTime e){
+        SimpleDateFormat simpleTimeFormat = new SimpleDateFormat("HH:mm:ss");
+        return simpleTimeFormat.format(java.sql.Timestamp.valueOf(e));
     }
 }

@@ -6,7 +6,7 @@ public class ListActivityVue {
     static Scanner es = new Scanner(System.in);
 
     public static String getname(){
-        System.out.print("Saisir le nom de l'activité = ");
+        System.out.print(ListeMessage.Msg005.getMsg());
         return es.nextLine();
     }
 
@@ -14,25 +14,36 @@ public class ListActivityVue {
         Boolean rv ;
         String reponse = "";
 
-        System.out.print("Saisir la nécessité d'une registration (Y/N) = ");
-        reponse = es.nextLine().toUpperCase();
+        do {
+            System.out.print(ListeMessage.Msg006.getMsg());
+            reponse = es.nextLine().toUpperCase();
+        }
+        while (reponse.matches("(Y|N)"));
+
         if (reponse.equals("Y")) {
             rv = true;
-        }
-        else {
+        } else {
             rv = false;
         }
         return rv;
     }
 
     public void displayinfo(ActivityType at){
-        System.out.println("Type d'activité = " + at.name);
-        System.out.println("Registration    = " + at.registration);
+        System.out.println(ListeMessage.Msg007.getMsg() + at.name);
+        System.out.println(ListeMessage.Msg008.getMsg() + at.registration);
         System.out.println("");
     }
 
-    public void displaymessagenotfound(String name){
-        System.out.println(name + " pas trouvé !");
+    public void displaymessage(ListeMessage msg,String name){
+        String msgtodisplay;
+
+        if (name.equals("")){
+            msgtodisplay = msg.getMsg();
+        }
+        else {
+            msgtodisplay = name + " " + msg.getMsg();
+        }
+        System.out.println(msgtodisplay);
         System.out.println("");
     }
 
@@ -41,7 +52,7 @@ public class ListActivityVue {
         String yn;
         Scanner sc = new Scanner(System.in);
 
-        System.out.print("Confirmez-vous la suppression de cet enregistrement ? (Y/N) ");
+        System.out.print(ListeMessage.Msg003.getMsg());
         yn = sc.nextLine();
         if(yn.matches("(y|Y|n|N)")) {
             if (yn.toUpperCase().equals("Y"))
@@ -50,7 +61,7 @@ public class ListActivityVue {
                 response = false;
         }
         else
-            System.out.println("Ce n'est pas une option");
+            System.out.println(ListeMessage.Msg004.getMsg());
 
         return response;
     }

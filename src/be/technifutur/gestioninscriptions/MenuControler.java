@@ -25,6 +25,12 @@ public class MenuControler implements MenuNode{
         int choix = 0;
         boolean saisieok = false;
 
+//        Callable action = menu.getAction();
+//        while(action != null){
+//            action.call();
+//            action = menu.getAction();
+//        }
+
         vue.setError(null);
         do {
             String reponse = vue.saisirMenu(model);
@@ -34,13 +40,19 @@ public class MenuControler implements MenuNode{
                     saisieok = true;
                     MenuNode menuNode = model.getNode(choix);
                     result = menuNode.getAction();
+//                    if(result==null){
+//                        if (model.name.equals("Menu principal")){
+//                            saisieok = false;
+//                            model =
+//                        }
+//                    }
                 }
                 else {
-                    vue.setError("Il n'y a pas d'option = " + (choix + 1));
+                    vue.setError(ListeMessage.Msg015.getMsg() + (choix + 1));
                 }
             } catch(NumberFormatException e)
             {
-                vue.setError(reponse + " n'est pas numérique !");
+                vue.setError(reponse + ListeMessage.Msg016.getMsg());
             }
         } while (saisieok == false);
         vue.setError(null);

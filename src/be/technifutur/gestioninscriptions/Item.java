@@ -5,6 +5,7 @@ import java.util.concurrent.Callable;
 
 public class Item implements MenuNode {
     private String itemname;
+    private Callable itemparent;
     private Callable itemaction;
     private ArrayList<Item> itemList = new ArrayList<>();
 
@@ -24,5 +25,13 @@ public class Item implements MenuNode {
 
     public void setAction(Callable action) {
         itemaction = action;
+    }
+
+    public Callable getActionParent() {
+        return itemparent;
+    }
+
+    public void setActionParent(Callable action) {
+        itemparent = action;
     }
 }
