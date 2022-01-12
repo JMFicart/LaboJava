@@ -2,16 +2,16 @@ package be.technifutur.gestioninscriptions;
 
 public class ActivityListFactory {
     IOData io;
-    MyData dt;
+    DataActivityType dt;
 
     public ActivityListFactory(){
         if(io == null){
             io = new IOData();
-            dt = io.LoadData();
+            dt = io.LoadDataActivityType();
         }
     }
 
-    public MyData getDt() {
+    public DataActivityType getDt() {
         return dt;
     }
 }

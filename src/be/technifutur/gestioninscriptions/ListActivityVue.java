@@ -18,7 +18,7 @@ public class ListActivityVue {
             System.out.print(ListeMessage.Msg006.getMsg());
             reponse = es.nextLine().toUpperCase();
         }
-        while (reponse.matches("(Y|N)"));
+        while (!reponse.matches("(Y|N)"));
 
         if (reponse.equals("Y")) {
             rv = true;
@@ -47,7 +47,7 @@ public class ListActivityVue {
         System.out.println("");
     }
 
-    public boolean getdeleteconfirmation(){
+public boolean getdeleteconfirmation(){
         Boolean response = false;
         String yn;
         Scanner sc = new Scanner(System.in);

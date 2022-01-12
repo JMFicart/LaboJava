@@ -12,7 +12,7 @@ public class ActivityListControler {
         if (search(name) == null) {
             activitytype = new ActivityType(name, registrationRequired);
             activitylistfactory.getDt().list.put(activitytype.name, activitytype);
-            io.SaveData(activitylistfactory.getDt());
+            io.SaveDataActivityType(activitylistfactory.getDt());
         }
         else {
             listactivityvue.displaymessage(ListeMessage.Msg001, name);
@@ -38,8 +38,8 @@ public class ActivityListControler {
         if (activitytype != null) {
             listactivityvue.displayinfo(activitytype);
             if (listactivityvue.getdeleteconfirmation() == true){
-                activitylistfactory.getDt().list.remove(activitytype);
-                io.SaveData(activitylistfactory.getDt());
+                activitylistfactory.getDt().list.remove(name);
+                io.SaveDataActivityType(activitylistfactory.getDt());
             }
         }
         else {

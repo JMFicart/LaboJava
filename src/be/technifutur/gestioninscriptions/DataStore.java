@@ -40,14 +40,17 @@ public class DataStore<D extends Serializable> {
             }
         }
 
-    public void save1(D l) {
-        data = l;
-        if (data != null) {
-            try (ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(file))) {
-                output.writeObject(data);
-            } catch (IOException e) {
-                e.printStackTrace();
+        public void save1(D l) {
+//            System.out.println("save0");
+            data = l;
+            if (data != null) {
+                try (ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(file))) {
+//                    System.out.println("save1");
+                    output.writeObject(data);
+                } catch (IOException e) {
+//                    System.out.println("save2");
+                    e.printStackTrace();
+                }
             }
-        }
     }
 }

@@ -4,32 +4,39 @@ import java.util.ArrayList;
 
 public class IOData {
 //    DataStore<MyData> myDataDataStore = new DataStore<>("Activity.txt", MyData::new);
-    MyData dt;
+    DataStore <DataActivityType> dsActivityType;
+    DataStore<DataActivity> dsActivity;
+    DataActivityType dt;
     DataActivity dataactivity;
     ActivityListFactory alf;
 
-    public MyData LoadData(){
-        DataStore<MyData> myDataDataStore = new DataStore<>("ActivityType.txt", MyData::new);
+    public DataActivityType LoadDataActivityType(){
+//        DataStore<MyData> myDataDataStore = new DataStore<>("ActivityType.txt", MyData::new);
+        dsActivityType = new DataStore<>("ActivityType.txt", DataActivityType::new);
 
-        dt= myDataDataStore.getData();
+        dt= dsActivityType.getData();
         return dt;
     }
 
     public DataActivity LoadDataActivity(){
-        DataStore<DataActivity> myDataDataStore = new DataStore<>("Activity.txt", DataActivity::new);
+//        DataStore<DataActivity> dsActicity = new DataStore<>("Activity.txt", DataActivity::new);
+        dsActivity = new DataStore<>("Activity.txt", DataActivity::new);
 
-        dataactivity= myDataDataStore.getData();
+        dataactivity= dsActivity.getData();
         return dataactivity;
     }
 
-    public void SaveData(MyData l){
+    public void SaveDataActivityType(DataActivityType l){
 //        dt = new MyData();
-        DataStore<MyData> myDataDataStore = new DataStore<>("ActivityType.txt", MyData::new);
+        //DataStore<MyData> myDataDataStore = new DataStore<>("ActivityType.txt", MyData::new);
+        dsActivityType = new DataStore<>("ActivityType.txt", DataActivityType::new);
+        dsActivityType.save1(l);
     }
 
     public void SaveDataActivity(DataActivity l){
 //        dt = new MyData();
-        DataStore<MyData> myDataDataStore = new DataStore<>("Activity.txt", MyData::new);
+        //DataStore<MyData> myDataDataStore = new DataStore<>("Activity.txt", MyData::new);
+        dsActivity.save();
     }
 
     public void setModele(ActivityListFactory type){this.alf = type;}
